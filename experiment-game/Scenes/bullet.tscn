@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnnhlqqapkghk"]
+
+[ext_resource type="Texture2D" uid="uid://cqegjgdbk2dpd" path="res://assets/bullet.png" id="1_xjght"]
+[ext_resource type="Script" uid="uid://ca8lr4nmyw161" path="res://Scripts/bullet.gd" id="2_oduel"]
+
+[node name="Bullets" type="Node2D"]
+
+[node name="Bullet" type="Sprite2D" parent="."]
+position = Vector2(6, 2)
+rotation = -1.5708
+scale = Vector2(0.1025, 0.104333)
+texture = ExtResource("1_xjght")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Bullet"]
+position = Vector2(19.5122, -47.9233)
+collision_layer = 3
+script = ExtResource("2_oduel")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bullet/RigidBody2D"]
+polygon = PackedVector2Array(146.342, -57.508, 146.342, 28.754, 263.415, 28.754, 536.586, -19.1693, 536.586, -28.754, 263.415, -67.0926)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Bullet/RigidBody2D/CollisionPolygon2D"]
+
+[connection signal="screen_exited" from="Bullet/RigidBody2D/CollisionPolygon2D/VisibleOnScreenNotifier2D" to="Bullet" method="_on_visible_on_screen_notifier_2d_screen_exited"]

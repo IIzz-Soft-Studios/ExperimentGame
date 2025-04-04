@@ -1,3 +1,9 @@
 res://Scenes/Plane1.tscn
 res://Scripts/movment.gd
 res://game.tscn
+res://Scenes/bullet.tscn
+res://Scenes/EnemyTest.tscn
+res://Scripts/EnemyTest.gd
+res://bullet.gd
+res://Scripts/bullet.gd
+res://Scripts/PlayerPlane.gd

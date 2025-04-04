@@ -3,6 +3,8 @@ extends CharacterBody2D
 @export var speed: float = 300.0
 @export var screen_margin: float = 20.0
 
+var bullet_scene = preload("res://Scenes/bullet.tscn")
+
 func _ready():
 	# Get the viewport size
 	var viewport_size = get_viewport_rect().size
@@ -10,18 +12,24 @@ func _ready():
 	# Set initial position to center of screen
 	position = viewport_size / 2
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	# Get input direction
 	var direction = Vector2.ZERO
-	direction.x = Input.get_axis("ui_left", "ui_right")
-	direction.y = Input.get_axis("ui_up", "ui_down")
-	
+	direction.x = Input.get_axis("move_left", "move_right")
+	direction.y = Input.get_axis("move_up", "move_down")
+	#print("Velocity: ", self.velocity)
+
 	# Normalize direction to prevent faster diagonal movement
 	if direction.length() > 0:
 		direction = direction.normalized()
 	
+	# Calculate speed with boost
+	var current_speed = speed
+	if Input.is_action_pressed("ui_accept"):  # Space bar for speed boost
+		current_speed *= 1.5
+	
 	# Calculate movement
-	velocity = direction * speed
+	self.velocity = direction * current_speed
 	
 	# Move the character
 	move_and_slide()
@@ -29,4 +37,17 @@ func _physics_process(delta):
 	# Keep player within screen bounds
 	var viewport_size = get_viewport_rect().size
 	position.x = clamp(position.x, screen_margin, viewport_size.x - screen_margin)
-	position.y = clamp(position.y, screen_margin, viewport_size.y - screen_margin) 
+	position.y = clamp(position.y, screen_margin, viewport_size.y - screen_margin)
+	
+	# Handle shooting
+	if Input.is_action_just_pressed("shoot"):
+		shoot_bullet()
+		print("shooting")
+		
+func shoot_bullet():
+	var b = bullet_scene.instantiate()
+	get_tree().current_scene.add_child(b)
+	b.global_position = $GunPoint.global_position 
+	b.rotation = rotation
+	print("GunPoint position:", $GunPoint.global_position)
+	print("Bullet spawned at:", b.global_position)
