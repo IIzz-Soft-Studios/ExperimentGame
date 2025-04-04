@@ -11,5 +11,6 @@ config_version=5
 [application]
 
 config/name="Experiment Game"
+run/main_scene="uid://svjqvbgb3t2x"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"

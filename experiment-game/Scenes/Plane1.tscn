@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://lnulqf3s1r3e"]
+
+[ext_resource type="Script" uid="uid://c1soow5iwyfja" path="res://Scripts/movment.gd" id="1_2mv60"]
+[ext_resource type="Texture2D" uid="uid://y0a5x8lfftyt" path="res://assets/Propellersprintsheet.png" id="2_an14h"]
+[ext_resource type="Texture2D" uid="uid://crg5wo0j4obyp" path="res://assets/PlaneA.png" id="2_lw5g2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jyred"]
+atlas = ExtResource("2_an14h")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiqxm"]
+atlas = ExtResource("2_an14h")
+region = Rect2(200, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymdtm"]
+atlas = ExtResource("2_an14h")
+region = Rect2(400, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3iceh"]
+atlas = ExtResource("2_an14h")
+region = Rect2(600, 0, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8gsqv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jyred")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiqxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymdtm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3iceh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlaneA" type="Node2D"]
+
+[node name="PlaneA" type="CharacterBody2D" parent="."]
+script = ExtResource("1_2mv60")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlaneA"]
+position = Vector2(1, -174)
+sprite_frames = SubResource("SpriteFrames_8gsqv")
+autoplay = "default"
+
+[node name="PlaneA" type="Sprite2D" parent="PlaneA"]
+position = Vector2(1, 0)
+texture = ExtResource("2_lw5g2")
+
+[node name="fusalge" type="CollisionPolygon2D" parent="PlaneA"]
+polygon = PackedVector2Array(-12, -186, -19, -167, -38, -166, -37, -83, -27, 75, -15, 163, -8, 244, 2, 256, 7, 240, 22, 81, 30, -7, 41, -86, 42, -166, 18, -182, 2, -190)
+
+[node name="leftwing" type="CollisionPolygon2D" parent="PlaneA"]
+polygon = PackedVector2Array(-42, -79, -29, 75, -216, 79, -242, 54, -231, 0, -171, -35)
+
+[node name="righwing" type="CollisionPolygon2D" parent="PlaneA"]
+polygon = PackedVector2Array(41, -81, 25, 79, 218, 80, 238, 68, 245, 22, 219, -12)
+
+[node name="tail" type="CollisionPolygon2D" parent="PlaneA"]
+polygon = PackedVector2Array(-70, 235, 63, 239, 84, 220, 77, 191, 34, 172, 12, 164, -25, 165, -79, 190, -89, 205, -87, 221)
