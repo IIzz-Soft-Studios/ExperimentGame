@@ -10,8 +10,8 @@ position = Vector2(20, -216)
 zoom = Vector2(0.5, 0.5)
 
 [node name="PlaneA" parent="." instance=ExtResource("1_80nbo")]
-position = Vector2(1, -8)
+position = Vector2(25, 34)
 
 [node name="EnemyTest" parent="." instance=ExtResource("2_e2o6t")]
-position = Vector2(-1.90735e-06, -575)
-rotation = 3.11192
+position = Vector2(514, -696)
+rotation = 3.14159

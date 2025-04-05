@@ -46,8 +46,16 @@ func _physics_process(_delta):
 		
 func shoot_bullet():
 	var b = bullet_scene.instantiate()
+
+	var muzzle = $GunPoint
+	var direction = muzzle.global_transform.x.normalized()
+
+	b.global_position = muzzle.global_position
+	b.rotation = direction.angle()
+	
+	# Set bullet velocity using its own method (recommended for RigidBody2D)
+	if b.has_method("set_velocity_from_direction"):
+		b.set_velocity_from_direction(direction)
+
 	get_tree().current_scene.add_child(b)
-	b.global_position = $GunPoint.global_position 
-	b.rotation = rotation
-	print("GunPoint position:", $GunPoint.global_position)
-	print("Bullet spawned at:", b.global_position)
+	print("Bullet spawned at:", b.global_position, "Direction:", direction)
