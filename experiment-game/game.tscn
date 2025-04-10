@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://svjqvbgb3t2x"]
+[gd_scene load_steps=4 format=3 uid="uid://svjqvbgb3t2x"]
 
 [ext_resource type="PackedScene" uid="uid://lnulqf3s1r3e" path="res://Scenes/Plane1.tscn" id="1_80nbo"]
 [ext_resource type="PackedScene" uid="uid://mgxub7wpr41d" path="res://Scenes/EnemyTest.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://cdrse140rskyq" path="res://Scenes/planeA.tscn" id="3_feb5d"]
 
 [node name="Game" type="Node2D"]
 
@@ -11,3 +12,7 @@ position = Vector2(25, 34)
 [node name="EnemyTest" parent="." instance=ExtResource("2_e2o6t")]
 position = Vector2(514, -696)
 rotation = 3.14159
+
+[node name="Node2D" parent="." instance=ExtResource("3_feb5d")]
+position = Vector2(-1885, -1237)
+rotation = 2.39285

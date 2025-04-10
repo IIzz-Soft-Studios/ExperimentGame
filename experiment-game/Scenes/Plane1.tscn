@@ -58,7 +58,7 @@ frame_progress = 0.689162
 position = Vector2(1, 0)
 texture = ExtResource("2_lw5g2")
 
-[node name="fusalge" type="CollisionPolygon2D" parent="PlaneA"]
+[node name="fusalage" type="CollisionPolygon2D" parent="PlaneA"]
 polygon = PackedVector2Array(-12, -186, -19, -167, -38, -166, -37, -83, -27, 75, -15, 163, -8, 244, 2, 256, 7, 240, 22, 81, 30, -7, 41, -86, 42, -166, 18, -182, 2, -190)
 
 [node name="leftwing" type="CollisionPolygon2D" parent="PlaneA"]

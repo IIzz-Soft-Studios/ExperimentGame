@@ -49,7 +49,7 @@ position = Vector2(1, 38)
 collision_layer = 7
 script = ExtResource("1_h5d2w")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PlaneA"]
+[node name="propellerspite" type="AnimatedSprite2D" parent="PlaneA"]
 position = Vector2(1, -174)
 sprite_frames = SubResource("SpriteFrames_aei1r")
 autoplay = "default"
@@ -58,7 +58,7 @@ autoplay = "default"
 position = Vector2(1, 0)
 texture = ExtResource("3_fspdi")
 
-[node name="fusalge" type="CollisionPolygon2D" parent="PlaneA"]
+[node name="fusalage" type="CollisionPolygon2D" parent="PlaneA"]
 polygon = PackedVector2Array(-12, -186, -19, -167, -38, -166, -37, -83, -27, 75, -15, 163, -8, 244, 2, 256, 7, 240, 22, 81, 30, -7, 41, -86, 42, -166, 18, -182, 2, -190)
 
 [node name="leftwing" type="CollisionPolygon2D" parent="PlaneA"]
