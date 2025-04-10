@@ -1,61 +1,65 @@
 extends CharacterBody2D
 
+@onready var camera: Camera2D = $Camera2D
+@onready var vitals: Node = $Vitals
+@onready var vitals_ui: VitalsUI = get_node_or_null("VitalsUI")
+
 @export var speed: float = 300.0
 @export var screen_margin: float = 20.0
 
 var bullet_scene = preload("res://Scenes/bullet.tscn")
 
 func _ready():
-	# Get the viewport size
 	var viewport_size = get_viewport_rect().size
-	
-	# Set initial position to center of screen
 	position = viewport_size / 2
 
-func _physics_process(_delta):
-	# Get input direction
+	if vitals_ui:
+		vitals.vitals_changed.connect(vitals_ui.update_vitals)
+		vitals_ui.update_vitals(vitals.oil, vitals.stamina, vitals.fuel)
+
+func _physics_process(delta):
 	var direction = Vector2.ZERO
 	direction.x = Input.get_axis("move_left", "move_right")
 	direction.y = Input.get_axis("move_up", "move_down")
-	#print("Velocity: ", self.velocity)
 
-	# Normalize direction to prevent faster diagonal movement
 	if direction.length() > 0:
 		direction = direction.normalized()
-	
-	# Calculate speed with boost
+
 	var current_speed = speed
-	if Input.is_action_pressed("ui_accept"):  # Space bar for speed boost
+	if Input.is_action_pressed("ui_accept"):  # Boost key (Shift/Enter/etc.)
 		current_speed *= 1.5
-	
-	# Calculate movement
+
+		# Boosting: drain stamina
+		if vitals.has_method("drain_stamina"):
+			vitals.drain_stamina(vitals.stamina_drain_from_boost * delta)
+		vitals.is_boosting = true
+	else:
+		vitals.is_boosting = false
+
 	self.velocity = direction * current_speed
-	
-	# Move the character
 	move_and_slide()
-	
-	# Keep player within screen bounds
-	var viewport_size = get_viewport_rect().size
-	position.x = clamp(position.x, screen_margin, viewport_size.x - screen_margin)
-	position.y = clamp(position.y, screen_margin, viewport_size.y - screen_margin)
-	
-	# Handle shooting
+
 	if Input.is_action_just_pressed("shoot"):
 		shoot_bullet()
-		print("shooting")
-		
+
 func shoot_bullet():
 	var b = bullet_scene.instantiate()
-
 	var muzzle = $GunPoint
 	var direction = muzzle.global_transform.x.normalized()
 
 	b.global_position = muzzle.global_position
 	b.rotation = direction.angle()
-	
-	# Set bullet velocity using its own method (recommended for RigidBody2D)
+
 	if b.has_method("set_velocity_from_direction"):
 		b.set_velocity_from_direction(direction)
 
 	get_tree().current_scene.add_child(b)
-	print("Bullet spawned at:", b.global_position, "Direction:", direction)
+
+func _process(_delta):
+	if camera:
+		var target_offset = (get_global_mouse_position() - global_position) * 0.1
+		camera.offset = target_offset.clamp(Vector2(-100, -100), Vector2(100, 100))
+
+func apply_oil_damage(amount: float) -> void:
+	if vitals:
+		vitals.apply_oil_damage(amount)

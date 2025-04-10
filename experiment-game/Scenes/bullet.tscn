@@ -1,25 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://cnnhlqqapkghk"]
 
 [ext_resource type="Texture2D" uid="uid://cqegjgdbk2dpd" path="res://assets/bullet.png" id="1_xjght"]
-[ext_resource type="Script" uid="uid://ca8lr4nmyw161" path="res://Scripts/bullet.gd" id="2_oduel"]
+[ext_resource type="Script" uid="uid://ca8lr4nmyw161" path="res://Scripts/bullets.gd" id="2_oduel"]
 
-[node name="Bullets" type="Node2D"]
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="RigidBody2D" type="RigidBody2D"]
 physics_interpolation_mode = 2
 position = Vector2(1.00001, 1.7643e-05)
 rotation = -1.5708
 collision_layer = 3
 script = ExtResource("2_oduel")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(1.0403e-05, 1.99999)
 scale = Vector2(0.0766109, 0.117731)
 polygon = PackedVector2Array(117.477, -59.4573, 117.477, 16.9882, 182.742, 16.9883, 195.795, 0.000459671, 456.854, 0.00107384, 536.586, -19.1693, 536.586, -28.754, 456.854, -42.4686, 195.795, -42.4693, 182.742, -59.4572)
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="RigidBody2D/CollisionPolygon2D"]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="CollisionPolygon2D"]
 
-[node name="Bullet" type="Sprite2D" parent="RigidBody2D"]
+[node name="Bullet" type="Sprite2D" parent="."]
 position = Vector2(4.00002, 3.45707e-06)
 rotation = 1.5708
 texture = ExtResource("1_xjght")

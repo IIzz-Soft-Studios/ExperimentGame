@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://lnulqf3s1r3e"]
+[gd_scene load_steps=10 format=3 uid="uid://lnulqf3s1r3e"]
 
 [ext_resource type="Texture2D" uid="uid://y0a5x8lfftyt" path="res://assets/Propellersprintsheet.png" id="2_an14h"]
 [ext_resource type="Texture2D" uid="uid://crg5wo0j4obyp" path="res://assets/PlaneA.png" id="2_lw5g2"]
 [ext_resource type="Script" uid="uid://4kbapbibsce5" path="res://Scripts/PlayerPlane.gd" id="3_2mv60"]
-[ext_resource type="PackedScene" uid="uid://cmexps8n6tbv8" path="res://Scenes/vitals_ui.tscn" id="4_3kjqj"]
-[ext_resource type="Script" uid="uid://bkt3vvy54pvu4" path="res://Scripts/vitals.gd" id="4_20s3u"]
+[ext_resource type="PackedScene" uid="uid://cmexps8n6tbv8" path="res://Scenes/health_bar.tscn" id="4_3kjqj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jyred"]
 atlas = ExtResource("2_an14h")
@@ -71,18 +70,16 @@ polygon = PackedVector2Array(41, -81, 25, 79, 218, 80, 238, 68, 245, 22, 219, -1
 polygon = PackedVector2Array(-70, 235, 63, 239, 84, 220, 77, 191, 34, 172, 12, 164, -25, 165, -79, 190, -89, 205, -87, 221)
 
 [node name="GunPoint" type="Marker2D" parent="PlaneA"]
-position = Vector2(1, -197)
+position = Vector2(1, -190)
+
+[node name="HealthBar" parent="PlaneA" instance=ExtResource("4_3kjqj")]
+offset_left = -265.0
+offset_top = -24.0
+offset_right = -15.0
+offset_bottom = 21.0
+script = null
 
 [node name="Camera2D" type="Camera2D" parent="PlaneA"]
 position = Vector2(0, -197)
 zoom = Vector2(0.3, 0.3)
 position_smoothing_enabled = true
-
-[node name="Vitals" type="Node2D" parent="PlaneA"]
-script = ExtResource("4_20s3u")
-
-[node name="VitalsUI" parent="PlaneA" instance=ExtResource("4_3kjqj")]
-offset_left = -252.0
-offset_top = -1.0
-offset_right = -52.0
-offset_bottom = 44.0
